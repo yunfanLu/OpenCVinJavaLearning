@@ -18,6 +18,12 @@ public class InputTools {
 		return singleton;
 	}
 
+	/**
+	 * 这个是打开文件的，将一个 image 变成 Mat
+	 * @param fileName
+	 * @return
+	 * @throws Exception
+	 */
 	public static Mat openFile(String fileName) throws Exception {
 		Mat newImage = Imgcodecs.imread(fileName);
 		if (newImage.dataAddr() == 0) {
