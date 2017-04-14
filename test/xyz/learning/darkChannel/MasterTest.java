@@ -3,10 +3,9 @@ package xyz.learning.darkChannel;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
-import xyz.haze.removal.Master;
+import xyz.haze.removal.Feature;
 import xyz.learning.iotools.ImageViewer;
 import xyz.learning.iotools.InputTools;
-import xyz.learning.iotools.OutputTools;
 
 public class MasterTest {
 	static {
@@ -14,28 +13,24 @@ public class MasterTest {
 	}
 
 	private static String path = "./image/output/";
+
 	public static void main(String[] args) throws Exception {
-		String fileName = "./image/c.png";
-		InputTools input = InputTools.getTools();
-		Mat originalImage = input.openFile(fileName);
-	
-		Master master = new Master();
+		String fileName = "./image/e.png";
+		Mat originalImage = InputTools.openFile(fileName);
+
+		Feature master = new Feature(originalImage);
 		
-		Mat m2 = master.getMinChannel(originalImage);
-		Mat dark_4 = master.getDarkChannel(m2, 4);
-		int atomsphericLight = master.getAtomsphericLight(dark_4, originalImage);
-		Mat tran = master.getTransmission(dark_4, atomsphericLight);
-		Mat tran_img = master.TransMission2Img(tran);
-		
-		OutputTools outputTools = new OutputTools();
-		outputTools.Mat2Image(m2, path, "minChanel.png");
-		outputTools.Mat2Image(dark_4, path, "darkPanne_9.png");
-		outputTools.Mat2Image(tran_img,path, "tram.png");
-		
-		
-		System.err.println(master.getAtomsphericLight(dark_4, originalImage));
-		
-		
+//		new ImageViewer().show(master.getMinChannelMat(),"getMinChannelMat");
+		new ImageViewer().show(master.getTransMission2Img(),"getTransMission2Img");
+//		new ImageViewer().show(master.getDarkChannel(),"getDarkChannel");
+//		new ImageViewer().show(master.getDarkChannel(),"getDarkChannel");
+//		OutputTools outputTools = new OutputTools();
+//		outputTools.Mat2Image(master.getMinChannelMat(), path, "minChanel_e.png");
+//		outputTools.Mat2Image(master.getDarkChannel(), path, "darkPanne_9_e.png");
+//		outputTools.Mat2Image(master.getTransMission2Img(), path, "tram_e.png");
+
+		System.err.println(master.getAtomsphericLight());
+
 		System.out.println("ends");
 	}
 }

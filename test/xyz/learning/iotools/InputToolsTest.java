@@ -1,16 +1,17 @@
 package xyz.learning.iotools;
 
-import org.opencv.core.Mat;
+import java.util.List;
+
+import xyz.haze.StringOperater;
 
 public class InputToolsTest {
 
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		String fileName = "a.png";
-		String path = "./image/";
-		
-		Mat mat = InputTools.openFile(path + fileName);
-		System.out.println(mat);
+		String path = "/Users/yunfanlu/WorkPlace/EclipseJava/OpenCVinJavaLearning/image/pritice_set/";
+		List<String> imagesName = InputTools.getPriticeFilesName(path);
+		for(String fileName:imagesName){
+			System.out.println(fileName);
+			System.out.println(StringOperater.getPMValFromFileName(fileName));
+		}
 	}
-
 }
